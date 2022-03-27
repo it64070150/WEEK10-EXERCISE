@@ -342,14 +342,61 @@ ___
 
 ## Exercise WEEK 10
 
-1. สร้าง form สำหรับ create new comment โดยใช้ ejs โดย form จะต้องสามารถอัพโหลดไฟล์รูปภาพได้ (ปรับเฉพาะส่วนในไฟล์ ejs)
-2. สร้าง route สำหรับ create new comment และรับไฟล์ image ที่ถูกอัพโหลดและเก็บไฟล์ไว้ในโฟลเดอร์ static/uploads จากนั้นทำการบันทึกข้อมูลลงในตาราง `blogs` และ ตาราง `images` ลงในฐานข้อมูล MySQL - จะต้องสามารถ upload ไฟล์จาก form ในข้อ 1 ได้
-3. ลองปรับปรุงโจทย์ในข้อ 2 โดยใช้ database transactions เพราะมีการ insert 2 ตาราง
-4. แสดงรายละเอียดของ comment ที่ถูกเพิ่ม ใน route GET `/blogs/:id` ที่แสดงหน้า detail ของ blog โดยต้องแสดงรูปภาพและรายละเอียดต่าง ๆ ให้ครบถ้วน (ดังภาพ)
+1. ปรับแก้ไข route GET `/blogs/:id/` ซึ่งดึงข้อมูลรายละเอียดของ blog มาแสดง โดย ณ ตอนนี้ยังไม่มีการดึงข้อมูลรูปภาพของ blog จากตาราง `images` มาแสดง
 
+```javascript
+router.get("/blogs/:id", function (req, res, next) {
+  const promise1 = pool.query("SELECT * FROM blogs WHERE id=?", [
+    req.params.id,
+  ]);
+  const promise2 = pool.query("SELECT * FROM comments WHERE blog_id=?", [
+    req.params.id,
+  ]);
 
-**หมายเหตุ 1: ให้ทุกคนทำการ generate ตัว database schema webpro ขึ้นมาใหม่ โดยใช้ file webpro_db.sql ที่ให้มา**
+  Promise.all([promise1, promise2])
+    .then((results) => {
+      const blogs = results[0];
+      const comments = results[1];
+      res.render("blogs/detail", {
+        blog: blogs[0][0],
+        comments: comments[0],
+        error: null,
+      });
+    })
+    .catch((err) => {
+      return next(err);
+    });
+});
+```
 
-**หมายเหตุ 2: ให้ทุกคนนำ file comment.js ที่ได้ทำไปใน week9-Exercise มาประยุกต์ใช้ต่อใน Lab นี้**
+2. ต่อเนื่องจากข้อ 1 ปรับแก้ไขหน้า detail.ejs ให้นำรูปภาพจากตาราง `images` มาแสดง
+
+IMAGE
+
+3. สร้าง form สำหรับ create new comment โดยใช้ ejs โดย form จะต้องสามารถอัพโหลดไฟล์รูปภาพได้ (ไฟล์ detail.ejs line 90 - 99)
+
+```ejs
+  <form method="POST" action="..." enctype="...">
+      <div class="field">
+          <label class="label">Add Comment</label>
+          <div class="control">
+            <textarea class="textarea" name="comment" placeholder="Add Comment Here"></textarea>
+          </div>
+        </div>
+        <input name="myImage" type="file">
+      <input class="button is-primary" type="submit" value="Submit">
+  </form>
+```
+*อย่าลืม `enctype="multipart/form-data"`*
+
+4. แก้ไข code ของ route สำหรับ create new comment ที่ทำใน WEEK09 ให้รับไฟล์ image ที่ถูกอัพโหลดและเก็บไฟล์ไว้ในโฟลเดอร์ static/uploads จากนั้นทำการบันทึกข้อมูลลงในตาราง `comments` และ ตาราง `images` - จะต้องสามารถ upload ไฟล์จาก form ในข้อ 3 ได้
+5. ลองปรับปรุงโจทย์ในข้อ 4 โดยใช้ database transactions เพราะมีการ insert 2 ตาราง
+6. แก้ไข detail.ejs ในส่วนที่แสดงผล comment โดยให้แสดงรูปภาพของ comment ด้วย (detail.ejs line 62 - 89)
+
+IMAGE
+
+**หมายเหตุ 1: ให้ทุกคนทำการ generate ตัว database schema webpro ขึ้นมาใหม่ โดยใช้ file 256503-webpro.sql ที่ให้มา (ผมมีการเพิ่ม column `comment_id` ในตาราง `images` ที่เป็น FK ไปหาตาราง `comments`)**
+
+**หมายเหตุ 2: ให้ทุกคนนำ file comment.js ที่ได้ทำไปใน week9-Exercise มาประยุกต์ใช้ต่อในสัปดาห์นี้**
 
 **หมายเหตุ 3: การทำงานในส่วน frontend ของ Lab นี้ ให้ทำในรูปแบบของ ejs + Vue.js หรือจะใช้ ejs อย่างเดียวก็ได้**
