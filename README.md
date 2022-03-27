@@ -338,13 +338,14 @@ router.delete('/blogs/:id', async (req, res, next) => {
 });
 ```
 
-___________________
+___
 
 ## Exercise WEEK 10
 
-1. สร้าง form สำหรับ create new comment โดยใช้ ejs โดย form จะต้องสามารถอัพโหลดไฟล์รูปภาพได้
-2. สร้าง route สำหรับ create new comment และรับไฟล์ image ที่ถูกอัพโหลดและเก็บไฟล์ไว้ในโฟลเดอร์ static/uploads จากนั้นทำการบันทึกข้อมูลลงในตาราง `blogs` และ ตาราง `images` ลงในฐานข้อมูล MySQL (จะต้องใช้ database transactions ด้วยนะครับ เพราะมีการ insert 2 ตาราง)
-3. แสดงรายละเอียดของ comment ที่ถูกเพิ่ม ใน route GET `/blogs/:id` ที่แสดงหน้า detail ของ blog โดยต้องแสดงรูปภาพและรายละเอียดต่าง ๆ ให้ครบถ้วน (ดังภาพ)
+1. สร้าง form สำหรับ create new comment โดยใช้ ejs โดย form จะต้องสามารถอัพโหลดไฟล์รูปภาพได้ (ปรับเฉพาะส่วนในไฟล์ ejs)
+2. สร้าง route สำหรับ create new comment และรับไฟล์ image ที่ถูกอัพโหลดและเก็บไฟล์ไว้ในโฟลเดอร์ static/uploads จากนั้นทำการบันทึกข้อมูลลงในตาราง `blogs` และ ตาราง `images` ลงในฐานข้อมูล MySQL - จะต้องสามารถ upload ไฟล์จาก form ในข้อ 1 ได้
+3. ลองปรับปรุงโจทย์ในข้อ 2 โดยใช้ database transactions เพราะมีการ insert 2 ตาราง
+4. แสดงรายละเอียดของ comment ที่ถูกเพิ่ม ใน route GET `/blogs/:id` ที่แสดงหน้า detail ของ blog โดยต้องแสดงรูปภาพและรายละเอียดต่าง ๆ ให้ครบถ้วน (ดังภาพ)
 
 
 **หมายเหตุ 1: ให้ทุกคนทำการ generate ตัว database schema webpro ขึ้นมาใหม่ โดยใช้ file webpro_db.sql ที่ให้มา**
