@@ -1,5 +1,6 @@
 const express = require("express")
 const path = require("path")
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -11,8 +12,12 @@ app.set('views', path.join(__dirname, 'views'))
 // Statics
 app.use(express.static(path.join(__dirname, 'static')))
 
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+// Encode body
+app.use(bodyParser.urlencoded({ extended: false}));
+
+
+// app.use(express.json()) // for parsing application/json
+// app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // routers
 const indexRouter = require('./routes/index')

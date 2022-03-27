@@ -44,8 +44,15 @@ router.post("/blogs/addlike/:blogId", async function (req, res, next) {
   }
 });
 
-router.post("/blogs", async function (req, res, next) {
+router.get("/create", async function (req, res, next) {
   // Your code here
+  res.render('blogs/create')
+});
+
+router.post("/create", async function (req, res, next) {
+  // Your code here
+  console.log(req.body)
+  res.redirect('/')
 });
 
 router.get("/blogs/:id", function (req, res, next) {

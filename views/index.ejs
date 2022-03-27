@@ -20,14 +20,18 @@
           <div class="content">
             <form method="GET" action="/">
             <div class="columns">
-              <div class="column is-4 is-offset-3">
+              <div class="column is-4 is-offset-2">
                 <input class="input" type="text" name="search" placeholder="ค้นชื่อบทความ" value="<%= search %>">
               </div>
               <div class="column is-2">
                 <input class="button" type="submit" value="Search">
               </div>
+              <div class="column is-2">
+                <input class="button" type="button" value="Create New Blog" onClick="window.location.href = '/create/'">
+              </div>
             </div>
-            </form>
+          </form>
+          </div>
             <div class="columns is-multiline">
               <% for (let blog of blogs) { %>
                 <div class="column is-3">

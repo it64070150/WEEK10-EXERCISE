@@ -87,6 +87,31 @@
                                     </article>
                                 </div>
                             <% } %>
+                            <form method="POST">
+                                <div class="columns box">
+                                    <div class="column is-7">
+                                        <input class="input" type="text" name="comment" placeholder="Comment here..." value="">
+                                    </div>
+                                    <div class="column is-3">
+                                        <div class="file">
+                                            <label class="file-label">
+                                              <input class="file-input" type="file" name="comment_image">
+                                              <span class="file-cta">
+                                                <span class="file-icon">
+                                                  <i class="fas fa-upload"></i>
+                                                </span>
+                                                <span class="file-label">
+                                                  Choose an image…
+                                                </span>
+                                              </span>
+                                            </label>
+                                          </div>
+                                    </div>
+                                    <div class="column is-2">
+                                        <input class="button is-primary" type="submit" value="Submit">
+                                    </div>
+                                </div>                         
+                            </form>
                     </div>
                 </div>
                 <footer class="card-footer">
