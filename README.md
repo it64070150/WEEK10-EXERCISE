@@ -337,3 +337,18 @@ router.delete('/blogs/:id', async (req, res, next) => {
   }
 });
 ```
+
+___________________
+
+## Exercise WEEK 10
+
+1. สร้าง form สำหรับ create new comment โดยใช้ ejs โดย form จะต้องสามารถอัพโหลดไฟล์รูปภาพได้
+2. สร้าง route สำหรับ create new comment และรับไฟล์ image ที่ถูกอัพโหลดและเก็บไฟล์ไว้ในโฟลเดอร์ static/uploads จากนั้นทำการบันทึกข้อมูลลงในตาราง `blogs` และ ตาราง `images` ลงในฐานข้อมูล MySQL (จะต้องใช้ database transactions ด้วยนะครับ เพราะมีการ insert 2 ตาราง)
+3. แสดงรายละเอียดของ comment ที่ถูกเพิ่ม ใน route GET `/blogs/:id` ที่แสดงหน้า detail ของ blog โดยต้องแสดงรูปภาพและรายละเอียดต่าง ๆ ให้ครบถ้วน (ดังภาพ)
+
+
+**หมายเหตุ 1: ให้ทุกคนทำการ generate ตัว database schema webpro ขึ้นมาใหม่ โดยใช้ file webpro_db.sql ที่ให้มา**
+
+**หมายเหตุ 2: ให้ทุกคนนำ file comment.js ที่ได้ทำไปใน week9-Exercise มาประยุกต์ใช้ต่อใน Lab นี้**
+
+**หมายเหตุ 3: การทำงานในส่วน frontend ของ Lab นี้ ให้ทำในรูปแบบของ ejs + Vue.js หรือจะใช้ ejs อย่างเดียวก็ได้**
