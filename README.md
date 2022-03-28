@@ -371,7 +371,8 @@ router.get("/blogs/:id", function (req, res, next) {
 
 2. ต่อเนื่องจากข้อ 1 ปรับแก้ไขหน้า detail.ejs ให้นำรูปภาพจากตาราง `images` มาแสดง
 
-IMAGE
+![Screen Shot 2565-03-28 at 06 40 47](https://user-images.githubusercontent.com/77012730/160306678-d2c357cc-12d0-474e-985f-2a8083f6b253.png)
+
 
 3. สร้าง form สำหรับ create new comment โดยใช้ ejs โดย form จะต้องสามารถอัพโหลดไฟล์รูปภาพได้ (ไฟล์ detail.ejs line 90 - 99)
 
@@ -393,7 +394,7 @@ IMAGE
 5. ลองปรับปรุงโจทย์ในข้อ 4 โดยใช้ database transactions เพราะมีการ insert 2 ตาราง
 6. แก้ไข detail.ejs ในส่วนที่แสดงผล comment โดยให้แสดงรูปภาพของ comment ด้วย (detail.ejs line 62 - 89)
 
-IMAGE
+![Screen Shot 2565-03-28 at 06 52 37](https://user-images.githubusercontent.com/77012730/160306688-583b08c9-fcf6-4b77-adba-6319c3caf66d.png)
 
 **หมายเหตุ 1: ให้ทุกคนทำการ generate ตัว database schema webpro ขึ้นมาใหม่ โดยใช้ file 256503-webpro.sql ที่ให้มา (ผมมีการเพิ่ม column `comment_id` ในตาราง `images` ที่เป็น FK ไปหาตาราง `comments`)**
 
