@@ -6,6 +6,10 @@ File upload and DB transaction
 #### 1. Multer ใช้สำรับ Upload รูปภาพ
 
 ####วิธีทำ
+0. ติดตั้ง multer
+```
+> npm install multer
+```
 
 1. สร้าง Instance สำหรับเรียกใช้ dependencies Multer
 ```javascript
