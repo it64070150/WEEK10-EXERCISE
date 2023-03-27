@@ -4,6 +4,7 @@ const pool = require("../config");
 
 router = express.Router();
 
+
 router.get("/blogs/search", async function (req, res, next) {
   // Your code here
   try{
@@ -44,12 +45,11 @@ router.post("/blogs/addlike/:blogId", async function (req, res, next) {
   }
 });
 
-router.get("/create", async function (req, res, next) {
-  // Your code here
+router.get("/blogs/create", async function (req, res, next) {
   res.render('blogs/create')
 });
 
-router.post("/create", async function (req, res, next) {
+router.post("/blogs", async function (req, res, next) {
   // Your code here
   console.log(req.body)
   res.redirect('/')

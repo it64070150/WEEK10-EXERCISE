@@ -135,6 +135,21 @@ return next(error)
 
 ##### Final code in create
 ```javascript
+
+// Require multer for file upload
+const multer = require('multer')
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './static/uploads')
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
+const upload = multer({ storage: storage })
+
+// POST - create new blog with single upload file
 router.post('/blogs', upload.single('myImage'), async function (req, res, next) {
     const file = req.file;
     if (!file) {
@@ -175,11 +190,13 @@ router.post('/blogs', upload.single('myImage'), async function (req, res, next) 
 });
 ```
 
+14. ทดสอบยิง API โดยใช้ `Postman`
+
 ___
 
 #### 3. Update Blog
 
-####วิธีทำ
+#### วิธีทำ
 1. สร้าง Router ```/blogs/:id``` ใหม่ในไฟล์ ```/routes/blog.js```
 
 ```javascript
@@ -258,11 +275,13 @@ router.put('/blogs/:id', upload.single('myImage'), async (req, res, next) => {
 });
 ```
 
+10. ทดสอบยิง API โดยใช้ `Postman`
+
 ----
 
 #### 4. Delete
 
-**เงื่อนไข**:ในการจะลบแต่ละ Blog จะต้องทำการเช็กว่า Blog นั้นมี comment หรือไม่ **หากมี comment** อยู่จะต้องแสดง message ว่า *"Can't Delete. This Blog has a comment"* แต่ถ้า Blog นั้น **ไม่มี Comment** ก็จะลบข้อมูลออกจากตาราง blogs และ**ลบข้อมูลรูปภาพออกจากตาราง images** ด้วย
+**เงื่อนไข**: ในการจะลบแต่ละ Blog จะต้องทำการเช็กว่า Blog นั้นมี comment หรือไม่ **หากมี comment** อยู่จะต้องแสดง message ว่า *"Can't Delete. This Blog has a comment"* แต่ถ้า Blog นั้น **ไม่มี Comment** ก็จะลบข้อมูลออกจากตาราง blogs และ**ลบข้อมูลรูปภาพออกจากตาราง images** ด้วย
 
 1. สร้าง Router `/blog/:id` ใหม่ในไฟล์ `/routes/blog.js`
 
@@ -342,6 +361,8 @@ router.delete('/blogs/:id', async (req, res, next) => {
   }
 });
 ```
+
+10. ทดสอบยิง API โดยใช้ `Postman`
 
 ___
 
